@@ -20,3 +20,4 @@
 
 # Database config
 /config/database.yml
+/config/backup.rb

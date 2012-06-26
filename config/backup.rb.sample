@@ -1,0 +1,39 @@
+Backup::Model.new(:simple_catalog, 'Simple catalog backup configuration') do
+
+  db_config = YAML.load_file("#{File.dirname(__FILE__)}/database.yml")
+
+  database PostgreSQL do |db|
+    db.name               = db_config["production"]["database"]
+    db.username           = db_config["production"]["username"]
+    db.password           = db_config["production"]["password"]
+    db.host               = db_config["production"]["host"]
+    db.port               = 5432
+  end
+
+  compress_with Bzip2
+
+  store_with Dropbox do |db|
+    db.api_key    = 'api_key'
+    db.api_secret = 'api_secret'
+    db.path       = '/Dropbox App Name'
+    db.keep       = 5
+  end
+
+  store_with Local do |local|
+    local.path = '/path/to/backups'
+    local.keep = 50
+  end
+
+  notify_by Mail do |mail|
+    mail.on_success = true
+    mail.on_failure = true
+
+    mail.from = 'taurus@amursu.ru'
+    mail.to = 'backup@my.mail'
+    mail.address = 'localhost'
+    mail.domain = 'amursu.ru'
+    mail.port = 25
+    mail.authentication = 'plain'
+  end
+end
+

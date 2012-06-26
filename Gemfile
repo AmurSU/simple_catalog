@@ -7,6 +7,7 @@ gem 'active_scaffold'
 gem 'devise', '~> 2.1.2'
 gem 'haml'
 gem 'russian'
+gem 'whenever'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -27,10 +28,11 @@ group :production do
   gem 'unicorn'
 
   # Backup automated system
-  gem 'backup'
+  gem 'backup', '~> 3.0.24'
   gem 'net-ssh', "~> 2.1.4"
   gem 'net-scp', "~> 1.0.4"
   gem 'mail'
+  gem 'dropbox-sdk', '~> 1.2.0'
 end
 
 group :development do
