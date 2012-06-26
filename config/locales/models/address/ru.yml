@@ -15,4 +15,5 @@ ru:
     attributes:
       address:
         url: "URL (адрес)"
+        description: "Описание/пояснение/обоснование"
         domain: "Доменное имя"

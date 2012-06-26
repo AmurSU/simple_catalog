@@ -4,3 +4,13 @@
 body {
   padding-top: 50px;
 }
+
+ul.domain_list {
+  list-style: none;
+  columns: 14em auto;
+  column-gap: 1em;
+  -moz-columns: 14em auto;
+  -moz-column-gap: 1em;
+  -webkit-columns: 14em auto;
+  -webkit-column-gap: 1em;
+}

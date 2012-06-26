@@ -1,0 +1,11 @@
+%h1 Доменные имена
+%p В алфавитном порядке
+
+%p
+  Скачать в формате #{link_to "текст", url_for(:format => "txt")},
+  #{link_to "JSON", url_for(:format => "json")}, #{link_to "XML", url_for(:format => "xml")},
+  #{link_to "Squid whitelist", url_for(:format => "squid")}.
+
+%ul.domain_list
+  - @addresses.each do |address|
+    %li= link_to address.domain, "http://"+address.domain+"/"

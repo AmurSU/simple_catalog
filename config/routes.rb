@@ -1,7 +1,10 @@
 SimpleCatalog::Application.routes.draw do
-  resources :addresses do as_routes end
-
-  resources :addresses
+  resources :addresses do
+    as_routes
+    collection do
+      get 'domains'
+    end
+  end
 
   devise_for :users
 
