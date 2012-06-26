@@ -1,4 +1,8 @@
 SimpleCatalog::Application.routes.draw do
+  resources :addresses do as_routes end
+
+  resources :addresses
+
   devise_for :users
 
   resources :users do
@@ -54,7 +58,7 @@ SimpleCatalog::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'home#index'
+  root :to => 'addresses#index'
 
   # See how all your routes lay out with "rake routes"
 

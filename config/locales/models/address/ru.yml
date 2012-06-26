@@ -1,0 +1,18 @@
+ru:
+  activerecord:
+    errors:
+      models:
+        address:
+          attributes:
+
+    models:
+      address:
+        one: "Адрес"
+        few: "Адреса"
+        many: "Адреса"
+        other: "Адреса"
+
+    attributes:
+      address:
+        url: "URL (адрес)"
+        domain: "Доменное имя"
