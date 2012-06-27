@@ -1,10 +1,14 @@
 %h1 Доменные имена
+- if @discipline
+  %p Для дисциплины «#{@discipline.name}»
 %p В алфавитном порядке
 
 %p
-  Скачать в формате #{link_to "текст", url_for(:format => "txt")},
-  #{link_to "JSON", url_for(:format => "json")}, #{link_to "XML", url_for(:format => "xml")},
-  #{link_to "Squid whitelist", url_for(:format => "squid")}.
+  Скачать в формате
+  #{link_to "текст", url_for(params.merge({:format => "txt"}))},
+  #{link_to "JSON", url_for(params.merge({:format => "json"}))},
+  #{link_to "XML", url_for(params.merge({:format => "xml"}))},
+  #{link_to "Squid whitelist", url_for(params.merge({:format => "squid"}))}.
 
 %ul.domain_list
   - @addresses.each do |address|

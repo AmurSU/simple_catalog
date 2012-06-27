@@ -7,13 +7,14 @@ ru:
 
     models:
       address:
-        one: "Адрес"
-        few: "Адреса"
-        many: "Адреса"
-        other: "Адреса"
+        one: "Интернет-адрес"
+        few: "Интернет-адреса"
+        many: "Интернет-адреса"
+        other: "Интернет-адреса"
 
     attributes:
       address:
-        url: "URL (адрес)"
+        url: "URL (адрес, ссылка)"
         description: "Описание/пояснение/обоснование"
         domain: "Доменное имя"
+        discipline: "Дисциплина"

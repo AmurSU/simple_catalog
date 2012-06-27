@@ -1,4 +1,6 @@
 class Address < ActiveRecord::Base
+  belongs_to :discipline
+
   attr_accessible :url
 
   before_save do |address|
@@ -13,5 +15,9 @@ class Address < ActiveRecord::Base
   end
   validates :url, :presence => true, :uniqueness => true
   validates :description, :presence => true
+
+  def to_label
+    domain
+  end
 
 end

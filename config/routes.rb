@@ -1,4 +1,8 @@
 SimpleCatalog::Application.routes.draw do
+  resources :disciplines do as_routes end
+
+  resources :disciplines
+
   resources :addresses do
     as_routes
     collection do

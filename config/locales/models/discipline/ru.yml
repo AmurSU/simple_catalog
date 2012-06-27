@@ -1,0 +1,18 @@
+ru:
+  activerecord:
+    errors:
+      models:
+        discipline:
+          attributes:
+
+    models:
+      discipline:
+        one: "Дисциплина"
+        few: "Дисциплины"
+        many: "Дисциплины"
+        other: "Дисциплины"
+
+    attributes:
+      discipline:
+        name: "Название"
+        addresses: "Интернет-адреса"
