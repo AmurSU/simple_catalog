@@ -1,5 +1,10 @@
 - if user_signed_in?
   %li{:class => ("active" if params[:controller] == "addresses")}
-    = link_to "Интернет-адреса", root_path
+    = link_to "Интернет-адреса", addresses_path
   %li{:class => ("active" if params[:controller] == "disciplines")}
     = link_to "Дисциплины", disciplines_path
+- else
+  %li{:class => ("active" if params[:action] == "domains")}
+    = link_to "Список доступных сайтов", root_path
+  %li{:class => ("active" if params[:action] == "disciplines")}
+    = link_to "Каталог ссылок по дисциплинам", url_for(:action => :disciplines)
