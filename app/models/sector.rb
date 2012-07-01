@@ -1,6 +1,6 @@
-class Discipline < ActiveRecord::Base
-  has_many :addresses
-  belongs_to :sector
+class Sector < ActiveRecord::Base
+  has_many :disciplines
+  has_many :addresses, :through => :disciplines
 
   attr_accessible :name
 

@@ -1,0 +1,19 @@
+ru:
+  activerecord:
+    errors:
+      models:
+        sector:
+          attributes:
+
+    models:
+      sector:
+        one: "Отрасль знаний"
+        few: "Отрасли знаний"
+        many: "Отрасли знаний"
+        other: "Отрасли знаний"
+
+    attributes:
+      sector:
+        name: "Название"
+        disciplines: "Дисциплины"
+        addresses: "Интернет-адреса"

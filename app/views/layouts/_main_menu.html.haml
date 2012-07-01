@@ -3,8 +3,10 @@
     = link_to "Интернет-адреса", addresses_path
   %li{:class => ("active" if params[:controller] == "disciplines")}
     = link_to "Дисциплины", disciplines_path
+  %li{:class => ("active" if params[:controller] == "sectors")}
+    = link_to "Отрасли знаний", sectors_path
 - else
   %li{:class => ("active" if params[:action] == "domains")}
     = link_to "Список доступных сайтов", root_path
   %li{:class => ("active" if params[:action] == "disciplines")}
-    = link_to "Каталог ссылок по дисциплинам", url_for(:action => :disciplines)
+    = link_to "Каталог ссылок по дисциплинам", catalog_path
