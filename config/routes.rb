@@ -67,7 +67,7 @@ SimpleCatalog::Application.routes.draw do
   # just remember to delete public/index.html.
   root :to => 'guest#domains'
 
-  get '/catalog' => 'guest#catalog', :as => :catalog
+  get '/catalog(/:sector_id(/:discipline_id))' => 'guest#catalog', :as => :catalog
   match '/:action' => 'guest'
 
   # See how all your routes lay out with "rake routes"
