@@ -8,6 +8,7 @@ jQuery(document).ready(function($) {
       timeout: 15000,
       beforeSend: function (jqXHR, settings) {
         $(".ajax_message").hide();
+        $(".ajax_spinner").show();
         $(".ajax_loading").show();
       },
       error: function (jqXHR, textStatus, errorThrown) {

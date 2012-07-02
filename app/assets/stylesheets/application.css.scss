@@ -14,3 +14,19 @@ ul.domain_list {
   -webkit-columns: 14em auto;
   -webkit-column-gap: 1em;
 }
+
+.ajax_spinner {
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  top: 50%;
+  display: none;
+}
+.ajax_spinner_image {
+  width: 128px;
+  height: 128px;
+  background: image-url("AmurSU_spinner_128.gif") top left no-repeat;
+  text-align: center;
+  margin: auto;
+  left: 49%;
+}
