@@ -14,8 +14,8 @@ jQuery(document).ready(function($) {
         $(".ajax_error").show();
       },
       success: function (data, textStatus, jqXHR) {
+        $(".domain_list").empty();
         if (data.length) {
-          $(".domain_list").empty();
           $.each(data, function (i, elem) {
             $("<li><a href=\"http://"+elem+"/\">"+elem+"</a></li>").appendTo(".domain_list");
           });
