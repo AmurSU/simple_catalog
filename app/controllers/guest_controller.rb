@@ -38,4 +38,18 @@ class GuestController < ApplicationController
     end
   end
 
+  def disciplines
+    @disciplines = Discipline.where(:sector_id => params[:sector_id])
+    respond_to do |format|
+      format.json { render :json => @disciplines.to_json(:only => [:id, :name]) }
+    end
+  end
+
+  def addresses
+    @addresses = Address.where(:discipline_id => params[:discipline_id])
+    respond_to do |format|
+      format.json { render :json => @addresses.to_json(:only => [:id, :url, :domain]) }
+    end
+  end
+
 end

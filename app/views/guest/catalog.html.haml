@@ -1,23 +1,24 @@
 %h1 Каталог ссылок на образовательные материалы по отраслям знаний
 %p Список доступных для посещения сайтов в сети Интернет формируется по данным каталога.
 
-- @sectors.each do |sector|
-  %h2= sector.name
-  .cat_sector_disciplines{:id => "sector_#{sector.id}_disciplines"}
-    - if params[:sector_id].to_i == sector.id
-      - @disciplines.each do |discipline|
-        %h3= discipline.name
-        .cat_discipline_addresses{:id => "discipline_#{discipline.id}_addresses"}
-          - if params[:discipline_id].to_i == discipline.id
-            %ul
-              - @addresses.each do |address|
-                %li #{link_to address.url, address.url} (#{link_to address.domain, "http://"+address.domain+"/"})
-            %p= link_to 'Скрыть интернет-адреса', url_for(:sector_id => sector.id, :discipline_id => nil), :class => "catalog_hide_addresses", :'data-sector-id' => sector.id
-          - else
-            %p= link_to 'Показать интернет-адреса', url_for(:sector_id => sector.id, :discipline_id => discipline.id), :class => "catalog_show_addresses", :'data-sector-id' => sector.id, :'data-discipline-id' => discipline.id
-          %p= link_to 'Скрыть дисциплины', url_for(:sector_id => nil, :discipline_id => nil), :class => "catalog_hide_disciplines", :'data-sector-id' => sector.id
-    - else
-      %p= link_to 'Показать дисциплины', url_for(:sector_id => sector.id), :class => "catalog_show_disciplines", :'data-sector-id' => sector.id
+#catalog
+  - @sectors.each do |sector|
+    %h2= sector.name
+    .cat_sector_disciplines
+      - if params[:sector_id].to_i == sector.id
+        - @disciplines.each do |discipline|
+          %h3= discipline.name
+          .cat_discipline_addresses
+            - if params[:discipline_id].to_i == discipline.id
+              %ul
+                - @addresses.each do |address|
+                  %li #{link_to address.url, address.url} (#{link_to address.domain, "http://"+address.domain+"/"})
+              %p= link_to 'Скрыть интернет-адреса', url_for(:sector_id => sector.id, :discipline_id => nil), :class => "catalog_hide_addresses", :'data-sector-id' => sector.id
+            - else
+              %p= link_to 'Показать интернет-адреса', url_for(:sector_id => sector.id, :discipline_id => discipline.id), :class => "catalog_show_addresses", :'data-sector-id' => sector.id, :'data-discipline-id' => discipline.id
+        %p= link_to 'Скрыть дисциплины', url_for(:sector_id => nil, :discipline_id => nil), :class => "catalog_hide_disciplines", :'data-sector-id' => sector.id
+      - else
+        %p= link_to 'Показать дисциплины', url_for(:sector_id => sector.id), :class => "catalog_show_disciplines", :'data-sector-id' => sector.id
 
 %p
   Данный каталог так же доступен в форматах 

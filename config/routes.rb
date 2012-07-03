@@ -68,7 +68,8 @@ SimpleCatalog::Application.routes.draw do
   root :to => 'guest#domains'
 
   get '/catalog(/:sector_id(/:discipline_id))' => 'guest#catalog', :as => :catalog
-  match '/:action' => 'guest'
+  get '/domains(.:format)' => 'guest#domains'
+  match '/guest/:action' => 'guest'
 
   # See how all your routes lay out with "rake routes"
 
