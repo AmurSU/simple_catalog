@@ -27,7 +27,7 @@ class GuestController < ApplicationController
       @sectors = Sector.includes(:disciplines => :addresses)
       options = {:only => :name, :include => {
                    :disciplines => {:only => :name, :include => {
-                                      :addresses => {:only => [:url, :description, :domain]}
+                                      :addresses => {:only => [:url, :domain]}
                                    }}
                 }}
     end
