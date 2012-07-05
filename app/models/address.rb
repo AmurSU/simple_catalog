@@ -1,7 +1,7 @@
 class Address < ActiveRecord::Base
   belongs_to :discipline
 
-  attr_accessible :url
+  attr_accessible :url, :description
 
   before_save do |address|
     if address.url_changed?
