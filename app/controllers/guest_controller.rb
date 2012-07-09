@@ -3,10 +3,15 @@ class GuestController < ApplicationController
   def domains
     @domains = Address.order("domain ASC")
     @domains = @domains.where("domain ILIKE ?", "%"+params[:search]+"%") if params[:search]
-    @domains = @domains.uniq.pluck("domain")
+    @domains = @domains.uniq.pluck("domain") unless params[:format] == 'squid'
     respond_to do |format|
       format.html
-      format.squid { render :text => @domains.map{|d| ".#{d}"}.join("\n") }
+      format.squid {
+        @domains = @domains.group("domain").select("domain, string_agg(description, ', ') AS description")
+        max_length = @domains.inject(0){|max,elem| elem.domain.length > max ? elem.domain.length : max }
+        @domains.map!{|d| "#{".#{d.domain}".ljust(max_length+1)} #{"# "+d.description if d.description}"}
+        render :text => @domains.join("\n")
+      }
       format.text  { render :text => @domains.join("\n") }
       format.json  { render :json => @domains }
       format.xml   { render :xml  => @domains }
