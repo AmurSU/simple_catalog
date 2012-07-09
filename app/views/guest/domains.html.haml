@@ -3,10 +3,12 @@
 %p Доступ во всемирную сеть Интернет из сети Амурского государственного университета ограничен только образовательными ресурсами, список которых вы можете видеть ниже.
 %p Список образовательных ресурсов формируется из <abbr title="Uniform Resource Locators (интернет-адресов)">URL</abbr>, указанных в рабочих программах дисциплин.
 
-= form_tag(url_for(), :method => "get", :class => "well form-inline") do
-  %label{:for => "search"} Введите доменное имя для поиска
-  %input#domain_search{:autofocus => true, :name => :search, :value => params[:search]}
-  %button{:type => "submit"} Искать
+= form_tag(url_for(), :method => "get", :class => "well form-inline input-append") do
+  %label{:for => "search"}!~ "Введите доменное имя для поиска: &nbsp;"
+  %input#domain_search{:autofocus => true, :name => :search, :value => params[:search]}>
+  %button.btn{:type => "submit"}
+    %i.icon-search
+    Искать
 
 %ul.domain_list
   - @domains.each do |domain|
