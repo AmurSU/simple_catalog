@@ -8,7 +8,7 @@ class GuestController < ApplicationController
       format.html
       format.squid {
         @domains = @domains.group("domain").select("domain, string_agg(description, ', ') AS description")
-        max_length = @domains.inject(0){|max,elem| elem.domain.length > max ? elem.domain.length : max }
+        max_length = @domains.map{ |address| address.domain.length }.max
         @domains.map!{|d| "#{".#{d.domain}".ljust(max_length+1)} #{"# "+d.description if d.description}"}
         render :text => @domains.join("\n")
       }
