@@ -8,6 +8,8 @@ gem 'devise', '~> 2.1.2'
 gem 'haml'
 gem 'russian'
 gem 'whenever'
+gem 'idn-ruby', :require => 'idn'
+gem 'addressable'
 
 # Gems used only for assets and not required
 # in production environments by default.

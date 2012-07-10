@@ -4,12 +4,13 @@ class GuestController < ApplicationController
     @domains = Address.order("domain ASC")
     @domains = @domains.where("domain ILIKE ?", "%"+params[:search]+"%") if params[:search]
     @domains = @domains.uniq.pluck("domain") unless params[:format] == 'squid'
+    @domains.map! { |d| IDN::Idna.toASCII(d) } unless params[:format] == 'squid'
     respond_to do |format|
       format.html
       format.squid {
         @domains = @domains.group("domain").select("domain, string_agg(description, ', ') AS description")
-        max_length = @domains.map{ |address| address.domain.length }.max
-        @domains.map!{|d| "#{".#{d.domain}".ljust(max_length+1)} #{"# "+d.description if d.description}"}
+        max_length = @domains.map{ |address| address.normalized_domain.length }.max
+        @domains.map!{|d| "#{".#{d.normalized_domain}".ljust(max_length+1)} #{"# "+d.description if d.description}"}
         render :text => @domains.join("\n")
       }
       format.text  { render :text => @domains.join("\n") }
@@ -51,9 +52,9 @@ class GuestController < ApplicationController
   end
 
   def addresses
-    @addresses = Address.where(:discipline_id => params[:discipline_id])
+    @addresses = Address.where(:discipline_id => params[:discipline_id]).order("url ASC")
     respond_to do |format|
-      format.json { render :json => @addresses.to_json(:only => [:id, :url, :domain]) }
+      format.json { render :json => @addresses.to_json(:only => [:id, :url, :domain], :methods => [:normalized_url, :normalized_domain]) }
     end
   end
 

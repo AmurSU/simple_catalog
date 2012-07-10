@@ -12,7 +12,7 @@
             - if params[:discipline_id].to_i == discipline.id
               %ul
                 - @addresses.each do |address|
-                  %li #{link_to address.url, address.url} (#{link_to address.domain, "http://"+address.domain+"/"})
+                  %li #{link_to address.url, address.normalized_url} (#{link_to address.domain, "http://"+address.normalized_domain+"/"})
               %p= link_to 'Скрыть интернет-адреса', url_for(:sector_id => sector.id, :discipline_id => nil), :class => "catalog_hide_addresses", :'data-sector-id' => sector.id
             - else
               %p= link_to 'Показать интернет-адреса', url_for(:sector_id => sector.id, :discipline_id => discipline.id), :class => "catalog_show_addresses", :'data-sector-id' => sector.id, :'data-discipline-id' => discipline.id

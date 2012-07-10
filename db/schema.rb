@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120701222735) do
+ActiveRecord::Schema.define(:version => 20120709041857) do
 
   create_table "addresses", :force => true do |t|
     t.string   "url"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20120701222735) do
 
   add_index "addresses", ["discipline_id"], :name => "index_addresses_on_discipline_id"
   add_index "addresses", ["domain"], :name => "index_addresses_on_domain"
-  add_index "addresses", ["url"], :name => "index_addresses_on_url", :unique => true
+  add_index "addresses", ["url", "discipline_id"], :name => "index_addresses_on_url_and_discipline_id", :unique => true
 
   create_table "disciplines", :force => true do |t|
     t.string   "name"

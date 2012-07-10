@@ -12,5 +12,5 @@
 
 %ul.domain_list
   - @domains.each do |domain|
-    %li= link_to domain, "http://"+domain+"/"
+    %li= link_to IDN::Idna.toUnicode(domain), "http://"+domain+"/"
 

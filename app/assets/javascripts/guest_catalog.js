@@ -48,7 +48,7 @@ jQuery(document).ready(function($) {
         container.empty();
         var list = $("<ul>");
         $.each(data, function (i, elem) {
-          $('<li><a href="'+elem.url+'">'+elem.url+'</a> (<a href="http://'+elem.domain+'/">'+elem.domain+'</a>)</li>').appendTo(list);
+          $('<li><a href="'+elem.normalized_url+'">'+elem.url+'</a> (<a href="http://'+elem.normalized_domain+'/">'+elem.domain+'</a>)</li>').appendTo(list);
         });
         list.appendTo(container);
         $('<p><a class="catalog_hide_addresses" data-sector-id="'+sector_id+'" data-discipline-id="'+discipline_id+'" href="/catalog/'+sector_id+'">Скрыть интернет-адреса</a></p>').appendTo(container);
