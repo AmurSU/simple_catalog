@@ -14,3 +14,7 @@
   - @domains.each do |domain|
     %li= link_to IDN::Idna.toUnicode(domain), "http://"+domain+"/"
 
+%p
+  Данный список доступен также в виде
+  #{link_to 'текстового файла', url_for(:format => :txt)} и
+  #{link_to 'JSON-массива', url_for(:format => :json)}.
