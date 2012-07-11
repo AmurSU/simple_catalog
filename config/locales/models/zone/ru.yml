@@ -1,0 +1,18 @@
+ru:
+  activerecord:
+    errors:
+      models:
+        zone:
+          attributes:
+
+    models:
+      zone:
+        one: "Доменная зона"
+        few: "Доменные зоны"
+        many: "Доменные зоны"
+        other: "Доменные зоны"
+
+    attributes:
+      zone:
+        suffix: "Суффикс зоны"
+        description: "Описание"

@@ -11,3 +11,5 @@
     = link_to "Дисциплины", disciplines_path
   %li{:class => ("active" if params[:controller] == "sectors")}
     = link_to "Отрасли знаний", sectors_path
+  %li{:class => ("active" if params[:controller] == "zones")}
+    = link_to "Доменные зоны", zones_path

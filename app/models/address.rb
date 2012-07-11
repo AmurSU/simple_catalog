@@ -5,11 +5,10 @@ class Address < ActiveRecord::Base
 
   attr_accessible :url, :description
 
+  # Extract site host from URL
   before_save do |address|
     if address.url_changed?
-      host = URI.parse(address.url).normalize.host
-      parts = IDN::Idna.toUnicode(host).split('.')
-      address.domain = "#{parts[-2]}.#{parts[-1]}"
+      address.domain = get_domain
     end
   end
 
@@ -46,6 +45,21 @@ class Address < ActiveRecord::Base
     rescue URI::InvalidURIError
       self[:url] = value
     end
+  end
+
+  def get_domain
+    domain = ""
+    host = IDN::Idna.toUnicode( URI.parse(url).normalize.host )
+    suffix_len = Zone.where("? ILIKE '%'||suffix", host).order("length DESC").pluck("char_length(suffix) AS length").first.to_i
+    unless suffix_len.zero?
+      suffix = host[-suffix_len..-1]
+      host = host[0...-suffix_len]
+      domain = host.split('.').last.to_s + suffix
+    else
+      parts = host.split('.')
+      domain = "#{parts[-2]}.#{parts[-1]}"
+    end
+    return domain
   end
 
 end

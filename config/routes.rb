@@ -1,4 +1,6 @@
 SimpleCatalog::Application.routes.draw do
+  resources :zones do as_routes end
+
   resources :sectors do as_routes end
 
   resources :disciplines do as_routes end
@@ -7,6 +9,7 @@ SimpleCatalog::Application.routes.draw do
     as_routes
     collection do
       get 'domains'
+      post 'rebuild'
     end
   end
 

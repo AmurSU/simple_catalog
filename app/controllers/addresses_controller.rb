@@ -24,4 +24,15 @@ class AddressesController < ApplicationController
       format.xml   { render :xml  => @addresses.to_xml( :only => [:domain, :description]) }
     end
   end
+
+  def rebuild
+    ActiveRecord::Base.transaction do
+      Address.find_each do |address|
+        address.domain = address.get_domain
+        address.save
+      end
+    end
+    redirect_to addresses_path
+  end
+
 end 
