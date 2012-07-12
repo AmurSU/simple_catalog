@@ -19,3 +19,4 @@ ru:
         current_sign_in_ip: "Текущий IP"
         password: "Пароль"
         password_confirmation: "Подтверждение пароля"
+        remember_me: "Запомнить меня"

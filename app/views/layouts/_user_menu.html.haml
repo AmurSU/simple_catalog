@@ -1,6 +1,6 @@
 - if user_signed_in?
-  %li
+  %li{:class => ("active" if params[:controller].start_with? "devise")}
     = link_to t("devise.labels.sign_out"), destroy_user_session_path, :method => :delete
 - else
-  %li
+  %li{:class => ("active" if params[:controller].start_with? "devise")}
     = link_to t("devise.labels.sign_in"), new_user_session_path
