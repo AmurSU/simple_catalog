@@ -15,10 +15,10 @@ class Address < ActiveRecord::Base
   validates_each :url do |record, attr, value|
     begin
       host = URI.parse(value).normalize.host
-      record.errors.add(attr, 'must contain a host part!') if host.nil?
-      record.errors.add(attr, 'hostname should include TLD!') unless host.include? '.' or host[-1] == '.'
+      record.errors.add(attr, :no_host) if host.nil?
+      record.errors.add(attr, :no_tld) unless host.include? '.' or host[-1] == '.'
     rescue URI::InvalidURIError
-      record.errors.add(attr, 'must be valid URI')
+      record.errors.add(attr, :invalid)
     end
   end
 

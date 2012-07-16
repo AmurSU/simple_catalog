@@ -4,6 +4,10 @@ ru:
       models:
         address:
           attributes:
+            url:
+              no_host: ": должен быть указан host"
+              no_tld: ": должен быть указан домен верхнего уровня"
+              invalid: "не является корректным URL"
 
     models:
       address:
