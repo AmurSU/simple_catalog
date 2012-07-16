@@ -37,11 +37,13 @@ class Address < ActiveRecord::Base
     @normalized_domain ||= IDN::Idna.toASCII(domain)
   end
 
-  # If no protocol specified, add one
+  # If no protocol specified, add one. And check, that url always decoded to Unicode (for searching)
   def url=(value)
     begin
       value = "http://"+value if not value.strip.empty? and URI.parse(value).normalize.host.nil?
-      self[:url] = value
+      url = URI.parse(URI::unencode(value))
+      url.host = IDN::Idna.toUnicode(url.host)
+      self[:url] = url.to_s
     rescue URI::InvalidURIError
       self[:url] = value
     end
