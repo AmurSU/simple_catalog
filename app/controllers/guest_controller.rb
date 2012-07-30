@@ -2,7 +2,10 @@ class GuestController < ApplicationController
 
   def domains
     @domains = Address.order("domain ASC")
-    @domains = @domains.where("domain ILIKE ?", "%"+params[:search]+"%") if params[:search]
+    if params[:search]
+      param = "%"+params[:search]+"%"
+      @domains = @domains.where("domain ILIKE ? OR url ILIKE ?", param, param)
+    end
     @domains = @domains.uniq.pluck("domain") unless params[:format] == 'squid'
     @domains.map! { |d| IDN::Idna.toASCII(d) } unless params[:format] == 'squid'
     respond_to do |format|
