@@ -1,13 +1,20 @@
 %h1 Каталог ссылок на образовательные материалы по дисциплинам
 %p Список доступных для посещения сайтов в сети Интернет формируется по данным каталога.
 
+= form_tag(url_for(), :method => "get", :class => "well form-inline input-append") do
+  %label{:for => "search"}!~ "Введите название дисциплины или часть интернет-адреса для поиска: &nbsp;"
+  %input#catalog_search{:autofocus => true, :name => :search, :value => params[:search]}>
+  %button.btn{:type => "submit"}
+    %i.icon-search
+    Искать
+
 #catalog
   - @disciplines.each do |discipline|
     %h2= discipline.name
     .cat_discipline_addresses
-      - if params[:discipline_id].to_i == discipline.id
+      - if params[:discipline_id].to_i == discipline.id or params[:search]
         %ul
-          - @addresses.each do |address|
+          - discipline.addresses.each do |address|
             %li #{link_to address.url, address.normalized_url} (#{link_to address.domain, "http://"+address.normalized_domain+"/"})
         %p= link_to 'Скрыть интернет-адреса', url_for(:discipline_id => nil), :class => "catalog_hide_addresses"
       - else

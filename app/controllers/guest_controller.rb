@@ -24,17 +24,18 @@ class GuestController < ApplicationController
 
   def catalog
     options = {}
-    if params[:format].nil? or params[:format] == 'html'
-      @disciplines = Discipline.all
-      if params[:discipline_id]
-        @addresses = Address.where(:discipline_id => params[:discipline_id])
-      end
+    if params[:search]
+      param = "%"+params[:search]+"%"
+      @disciplines = Discipline.includes(:addresses).joins(:addresses)
+        .where("disciplines.name ILIKE ? OR addresses.url ILIKE ?", param, param)
+      options = {:only => [:id, :name], :include => {:addresses => {:only => [:url, :domain], :methods => [:normalized_url, :normalized_domain]} } }
     else
-      @disciplines = Discipline.includes(:addresses)
-      options = {:only => :name, :include => {
-                                      :addresses => {:only => [:url, :domain]}
-                                 }
-                }
+      if params[:format].nil? or params[:format] == 'html'
+        @disciplines = Discipline.all
+      else
+        @disciplines = Discipline.includes(:addresses).joins(:addresses)
+      end
+      options = {:only => :name, :include => {:addresses => {:only => [:url, :domain]} } }
     end
     respond_to do |format|
       format.html  
