@@ -25,32 +25,21 @@ class GuestController < ApplicationController
   def catalog
     options = {}
     if params[:format].nil? or params[:format] == 'html'
-      @sectors = Sector.all
-      if params[:sector_id]
-        @disciplines = Discipline.where(:sector_id => params[:sector_id])
-        if params[:sector_id]
-          @addresses = Address.where(:discipline_id => params[:discipline_id])
-        end
+      @disciplines = Discipline.all
+      if params[:discipline_id]
+        @addresses = Address.where(:discipline_id => params[:discipline_id])
       end
     else
-      @sectors = Sector.includes(:disciplines => :addresses)
+      @disciplines = Discipline.includes(:addresses)
       options = {:only => :name, :include => {
-                   :disciplines => {:only => :name, :include => {
                                       :addresses => {:only => [:url, :domain]}
-                                   }}
-                }}
+                                 }
+                }
     end
     respond_to do |format|
       format.html  
-      format.json  { render :json => @sectors.to_json(options) }
-      format.xml   { render :xml  => @sectors.to_xml(options) }
-    end
-  end
-
-  def disciplines
-    @disciplines = Discipline.where(:sector_id => params[:sector_id])
-    respond_to do |format|
-      format.json { render :json => @disciplines.to_json(:only => [:id, :name]) }
+      format.json  { render :json => @disciplines.to_json(options) }
+      format.xml   { render :xml  => @disciplines.to_xml(options) }
     end
   end
 
