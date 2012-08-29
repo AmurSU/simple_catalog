@@ -21,3 +21,4 @@
 # Database config
 /config/database.yml
 /config/backup.rb
+/config/ldap.yml

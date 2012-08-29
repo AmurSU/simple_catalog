@@ -3,9 +3,9 @@
     %legend #{t("devise.labels.sign_in")}
 
   .control-group
-    = f.label :email, :class => "control-label"
+    = f.label :uid, :class => "control-label"
     .controls
-      = f.email_field :email
+      = f.text_field :uid
 
   .control-group
     = f.label :password, :class => "control-label"
@@ -16,6 +16,10 @@
     .control-group
       .controls
         = f.label :remember_me, raw("#{f.check_box(:remember_me)}#{f.label(:remember_me, :class => "checkbox")}"), :class => "checkbox"
+
+  %p
+    %span.label.label-important Примечание:
+    Для входа используются единые учётные данные АмГУ. Используйте выданное вам имя пользователя (вида <tt>imya.familiya</tt>) и пароль для входа.
 
   .form-actions
     %button.btn.btn-primary{type: "submit"} #{t("devise.labels.sign_in")}

@@ -15,8 +15,11 @@ ru:
     attributes:
       user:
         email: "E-mail"
+        name: "Имя"
+        uid: "Идентификатор LDAP"
         current_sign_in_at: "Время текущего входа в систему"
         current_sign_in_ip: "Текущий IP"
         password: "Пароль"
         password_confirmation: "Подтверждение пароля"
         remember_me: "Запомнить меня"
+        created_at: "Зарегистрирован (первый вход)"

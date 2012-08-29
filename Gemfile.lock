@@ -65,6 +65,9 @@ GEM
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
+    devise_ldap_authenticatable (0.6.1)
+      devise (>= 2.0.0)
+      net-ldap (~> 0.2.2)
     dropbox-sdk (1.2)
       json
     erubis (2.7.0)
@@ -88,6 +91,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.19)
     multi_json (1.3.6)
+    net-ldap (0.2.2)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -172,6 +176,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   debugger
   devise (~> 2.1.2)
+  devise_ldap_authenticatable
   dropbox-sdk (~> 1.2.0)
   haml
   idn-ruby

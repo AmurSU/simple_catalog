@@ -35,6 +35,7 @@ after 'deploy:update_code', :roles => :app do
   run "test -d #{deploy_to}/shared/config || mkdir #{deploy_to}/shared/config"
   run "test -f #{deploy_to}/shared/config/database.yml || cp #{current_release}/config/database.yml.example #{deploy_to}/shared/config/database.yml"
   run "test -f #{deploy_to}/shared/config/backup.rb || cp #{current_release}/config/backup.rb.example #{deploy_to}/shared/config/backup.rb"
+  run "test -f #{deploy_to}/shared/config/ldap.yml || cp #{current_release}/config/ldap.yml.sample #{deploy_to}/shared/config/ldap.yml"
 end
 
 after 'deploy:update_code', :roles => :app do
@@ -44,6 +45,9 @@ after 'deploy:update_code', :roles => :app do
 
   run "rm -f #{current_release}/config/backup.rb"
   run "ln -s #{deploy_to}/shared/config/backup.rb #{current_release}/config/backup.rb"
+
+  run "rm -f #{current_release}/config/ldap.yml"
+  run "ln -s #{deploy_to}/shared/config/ldap.yml #{current_release}/config/ldap.yml"
 end
 
 # Для автоматической прекомпиляции assets
