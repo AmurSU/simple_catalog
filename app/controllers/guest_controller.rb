@@ -39,6 +39,7 @@ class GuestController < ApplicationController
     end
     respond_to do |format|
       format.html  
+      format.js
       format.json  { render :json => @disciplines.to_json(options) }
       format.xml   { render :xml  => @disciplines.to_xml(options) }
     end

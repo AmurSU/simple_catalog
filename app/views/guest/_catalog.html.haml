@@ -1,0 +1,10 @@
+- @disciplines.each do |discipline|
+  %h2= discipline.name
+  .cat_discipline_addresses
+    - if params[:discipline_id].to_i == discipline.id or params[:search]
+      %ul
+        - discipline.addresses.each do |address|
+          %li #{link_to address.url, address.normalized_url} (#{link_to address.domain, "http://"+address.normalized_domain+"/"})
+      %p= link_to 'Скрыть интернет-адреса', url_for(:discipline_id => nil), :class => "catalog_hide_addresses"
+    - else
+      %p= link_to 'Показать интернет-адреса', url_for(:discipline_id => discipline.id), :class => "catalog_show_addresses", :'data-discipline-id' => discipline.id

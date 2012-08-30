@@ -37,9 +37,9 @@ jQuery(document).ready(function($) {
   // Searching in catalog
   $('#catalog_search').on('input', function () {
     $.ajax({
-      url: "/catalog.json",
+      url: "/catalog.js",
       data: {search: $(this).val()},
-      dataType: 'json',
+      dataType: 'script',
       timeout: 15000,
       beforeSend: function (jqXHR, settings) {
         $(".ajax_message").hide();
@@ -48,22 +48,6 @@ jQuery(document).ready(function($) {
       },
       error: function (jqXHR, textStatus, errorThrown) {
         $(".ajax_error").show();
-      },
-      success: function (data, textStatus, jqXHR) {
-        $("#catalog").hide().empty();
-        if (data.length) {
-          $.each(data, function (i, elem) {
-            var cnts = $("<h2>"+elem.name+"</h2><div class=\"cat_discipline_addresses\"></div>").appendTo("#catalog");
-            var ul = $("<ul></ul>").appendTo(cnts[1]);
-            $.each(elem.addresses, function (i, addr) {
-              $('<li><a href="'+addr.normalized_url+'">'+addr.url+'</a> (<a href="http://'+addr.normalized_domain+'/">'+addr.domain+'</a>)</li>').appendTo(ul);
-            });
-            $('<p><a class="catalog_hide_addresses" data-discipline-id="'+elem.id+'" href="/catalog">Скрыть интернет-адреса</a></p>').appendTo(cnts[1]);
-          });
-        } else {
-          $(".ajax_not_found").show();
-        }
-        $("#catalog").show();
       },
       complete: function (jqXHR, textStatus) {
         $(".ajax_spinner").hide();
