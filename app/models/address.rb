@@ -9,6 +9,8 @@ class Address < ActiveRecord::Base
   before_save do |address|
     if address.url_changed?
       address.domain = get_domain
+      address.generate_normalized_url!
+      address.generate_normalized_domain!
     end
   end
 
@@ -27,14 +29,6 @@ class Address < ActiveRecord::Base
 
   def to_label
     domain
-  end
-
-  def normalized_url
-    @normalized_url ||= URI.parse(url).normalize.to_s
-  end
-
-  def normalized_domain
-    @normalized_domain ||= IDN::Idna.toASCII(domain)
   end
 
   # If no protocol specified, add one. And check, that url always decoded to Unicode (for searching)
@@ -62,6 +56,28 @@ class Address < ActiveRecord::Base
       domain = "#{parts[-2]}.#{parts[-1]}"
     end
     return domain
+  end
+
+  def normalized_url
+    if self["normalized_url"].blank? or url_changed?
+      generate_normalized_url!
+    end
+    self["normalized_url"]
+  end
+
+  def normalized_domain
+    if self["normalized_domain"].blank? or url_changed?
+      generate_normalized_domain!
+    end
+    self["normalized_domain"]
+  end
+
+  def generate_normalized_url!
+    self["normalized_url"] = URI.parse(url).normalize.to_s
+  end
+
+  def generate_normalized_domain!
+    self["normalized_domain"] = IDN::Idna.toASCII(domain)
   end
 
 end

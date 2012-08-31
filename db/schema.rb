@@ -11,15 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120711014857) do
+ActiveRecord::Schema.define(:version => 20120830234420) do
 
   create_table "addresses", :force => true do |t|
     t.string   "url"
     t.string   "description"
     t.string   "domain"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.integer  "discipline_id"
+    t.string   "normalized_url"
+    t.string   "normalized_domain"
   end
 
   add_index "addresses", ["discipline_id"], :name => "index_addresses_on_discipline_id"
