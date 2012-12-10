@@ -7,7 +7,7 @@ gem 'active_scaffold'
 gem 'devise', '~> 2.1.2'
 gem 'haml'
 gem 'russian'
-gem 'whenever'
+gem 'whenever', '~> 0.7.3'
 gem 'idn-ruby', :require => 'idn'
 gem 'addressable'
 
@@ -18,6 +18,7 @@ group :assets do
   gem 'bootstrap-sass', '~> 2.0.3.1'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'therubyracer', :platforms => :ruby
+  gem 'libv8', '~> 3.11.8', :platforms => :ruby # For therubyracer
   gem 'uglifier', '>= 1.0.3'
 end
 
