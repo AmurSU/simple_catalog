@@ -71,6 +71,11 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    factory_girl (4.1.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.1.0)
+      factory_girl (~> 4.1.0)
+      railties (>= 3.0.0)
     haml (3.1.7)
     highline (1.6.15)
     hike (1.2.1)
@@ -187,6 +192,7 @@ DEPENDENCIES
   debugger
   devise (~> 2.1.2)
   dropbox-sdk (~> 1.2.0)
+  factory_girl_rails
   haml
   idn-ruby
   jquery-rails
