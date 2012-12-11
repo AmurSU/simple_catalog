@@ -3,7 +3,7 @@ require 'test_helper'
 class SectorsControllerTest < ActionController::TestCase
   setup do
     sign_in_user
-    @sector = sectors(:one)
+    @sector = create(:sector)
   end
 
   test "should get index" do
@@ -18,7 +18,7 @@ class SectorsControllerTest < ActionController::TestCase
 
   test "should create sector" do
     assert_difference('Sector.count') do
-      post :create, record: { name: "Sectoration" }
+      post :create, record: attributes_for(:sector)
     end
     assert_redirected_to sectors_path
   end

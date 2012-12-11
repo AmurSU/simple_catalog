@@ -3,7 +3,7 @@ require 'test_helper'
 class DisciplinesControllerTest < ActionController::TestCase
   setup do
     sign_in_user
-    @discipline = disciplines(:otu)
+    @discipline = create(:discipline)
   end
 
   test "should get index" do
@@ -18,7 +18,7 @@ class DisciplinesControllerTest < ActionController::TestCase
 
   test "should create discipline" do
     assert_difference('Discipline.count') do
-      post :create, record: { name: "Informatics" }
+      post :create, record: attributes_for(:discipline)
     end
     assert_redirected_to disciplines_path
   end

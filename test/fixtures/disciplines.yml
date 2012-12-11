@@ -1,7 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-otu:
-  name: Основы теории управления
-
-polit:
-  name: Политология

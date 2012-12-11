@@ -3,7 +3,7 @@ require 'test_helper'
 class AddressesControllerTest < ActionController::TestCase
   setup do
     sign_in_user
-    @address = addresses(:taurus)
+    @address = create(:address)
   end
 
   test "should get index" do
@@ -18,7 +18,7 @@ class AddressesControllerTest < ActionController::TestCase
 
   test "should create address" do
     assert_difference('Address.count') do
-      post :create, record: { url: "http://example.com/", description: "Awesome example" }
+      post :create, record: attributes_for(:address)
     end
     assert_redirected_to addresses_path
   end
@@ -29,10 +29,11 @@ class AddressesControllerTest < ActionController::TestCase
   end
 
   test "should update address" do
-    put :update, id: @address, record: { url: "http://example.org/" }
+    new_url = attributes_for(:address)[:url]
+    put :update, id: @address, record: { url: new_url }
     assert_redirected_to addresses_path
     @address.reload
-    assert_equal "http://example.org/", @address.url
+    assert_equal new_url, @address.url
   end
 
   test "should destroy address" do

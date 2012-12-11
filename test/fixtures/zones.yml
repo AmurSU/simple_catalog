@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-org_ru:
-  suffix: .org.ru
-  description: ORG Russia
-
-com_ua:
-  suffix: .com.ua
-  description: Commercial Ukraine

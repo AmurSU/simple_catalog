@@ -3,7 +3,7 @@ require 'test_helper'
 class ZonesControllerTest < ActionController::TestCase
   setup do
     sign_in_user
-    @zone = zones(:org_ru)
+    @zone = create(:zone)
   end
 
   test "should get index" do
@@ -18,7 +18,7 @@ class ZonesControllerTest < ActionController::TestCase
 
   test "should create zone" do
     assert_difference('Zone.count') do
-      post :create, record: { description: @zone.description, suffix: ".net.com" }
+      post :create, record: attributes_for(:zone)
     end
     assert_redirected_to zones_path
   end
@@ -30,7 +30,7 @@ class ZonesControllerTest < ActionController::TestCase
 
   test "should update zone" do
     new_suffix = ".com.net"
-    put :update, id: @zone, record: { description: @zone.description, suffix: new_suffix }
+    put :update, id: @zone, record: { suffix: new_suffix }
     assert_redirected_to zones_path
     @zone.reload
     assert_equal new_suffix, @zone.suffix

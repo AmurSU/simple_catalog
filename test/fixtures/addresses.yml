@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-taurus:
-  url: http://taurus.amursu.ru/
-  description: 'Amur SU timetable'
-
-bash:
-  url: http://bash.org.ru
-  description: 'Funny quotations'
