@@ -2,13 +2,13 @@ require 'test_helper'
 
 class AddressesControllerTest < ActionController::TestCase
   setup do
-    @address = addresses(:one)
+    sign_in_user
+    @address = addresses(:taurus)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:addresses)
   end
 
   test "should get new" do
@@ -18,15 +18,9 @@ class AddressesControllerTest < ActionController::TestCase
 
   test "should create address" do
     assert_difference('Address.count') do
-      post :create, address: { domain: @address.domain, url: @address.url }
+      post :create, record: { url: "http://example.com/", description: "Awesome example" }
     end
-
-    assert_redirected_to address_path(assigns(:address))
-  end
-
-  test "should show address" do
-    get :show, id: @address
-    assert_response :success
+    assert_redirected_to addresses_path
   end
 
   test "should get edit" do
@@ -35,8 +29,10 @@ class AddressesControllerTest < ActionController::TestCase
   end
 
   test "should update address" do
-    put :update, id: @address, address: { domain: @address.domain, url: @address.url }
-    assert_redirected_to address_path(assigns(:address))
+    put :update, id: @address, record: { url: "http://example.org/" }
+    assert_redirected_to addresses_path
+    @address.reload
+    assert_equal "http://example.org/", @address.url
   end
 
   test "should destroy address" do

@@ -2,13 +2,13 @@ require 'test_helper'
 
 class SectorsControllerTest < ActionController::TestCase
   setup do
+    sign_in_user
     @sector = sectors(:one)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:sectors)
   end
 
   test "should get new" do
@@ -18,15 +18,9 @@ class SectorsControllerTest < ActionController::TestCase
 
   test "should create sector" do
     assert_difference('Sector.count') do
-      post :create, sector: { name: @sector.name }
+      post :create, record: { name: "Sectoration" }
     end
-
-    assert_redirected_to sector_path(assigns(:sector))
-  end
-
-  test "should show sector" do
-    get :show, id: @sector
-    assert_response :success
+    assert_redirected_to sectors_path
   end
 
   test "should get edit" do
@@ -35,15 +29,17 @@ class SectorsControllerTest < ActionController::TestCase
   end
 
   test "should update sector" do
-    put :update, id: @sector, sector: { name: @sector.name }
-    assert_redirected_to sector_path(assigns(:sector))
+    new_name = "Sectored"
+    put :update, id: @sector, record: { name: new_name }
+    assert_redirected_to sectors_path
+    @sector.reload
+    assert_equal new_name, @sector.name
   end
 
   test "should destroy sector" do
     assert_difference('Sector.count', -1) do
       delete :destroy, id: @sector
     end
-
     assert_redirected_to sectors_path
   end
 end

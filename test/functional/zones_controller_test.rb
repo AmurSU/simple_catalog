@@ -2,13 +2,13 @@ require 'test_helper'
 
 class ZonesControllerTest < ActionController::TestCase
   setup do
-    @zone = zones(:one)
+    sign_in_user
+    @zone = zones(:org_ru)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:zones)
   end
 
   test "should get new" do
@@ -18,15 +18,9 @@ class ZonesControllerTest < ActionController::TestCase
 
   test "should create zone" do
     assert_difference('Zone.count') do
-      post :create, zone: { description: @zone.description, suffix: @zone.suffix }
+      post :create, record: { description: @zone.description, suffix: ".net.com" }
     end
-
-    assert_redirected_to zone_path(assigns(:zone))
-  end
-
-  test "should show zone" do
-    get :show, id: @zone
-    assert_response :success
+    assert_redirected_to zones_path
   end
 
   test "should get edit" do
@@ -35,15 +29,17 @@ class ZonesControllerTest < ActionController::TestCase
   end
 
   test "should update zone" do
-    put :update, id: @zone, zone: { description: @zone.description, suffix: @zone.suffix }
-    assert_redirected_to zone_path(assigns(:zone))
+    new_suffix = ".com.net"
+    put :update, id: @zone, record: { description: @zone.description, suffix: new_suffix }
+    assert_redirected_to zones_path
+    @zone.reload
+    assert_equal new_suffix, @zone.suffix
   end
 
   test "should destroy zone" do
     assert_difference('Zone.count', -1) do
       delete :destroy, id: @zone
     end
-
     assert_redirected_to zones_path
   end
 end

@@ -2,13 +2,13 @@ require 'test_helper'
 
 class DisciplinesControllerTest < ActionController::TestCase
   setup do
-    @discipline = disciplines(:one)
+    sign_in_user
+    @discipline = disciplines(:otu)
   end
 
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:disciplines)
   end
 
   test "should get new" do
@@ -18,15 +18,9 @@ class DisciplinesControllerTest < ActionController::TestCase
 
   test "should create discipline" do
     assert_difference('Discipline.count') do
-      post :create, discipline: { name: @discipline.name }
+      post :create, record: { name: "Informatics" }
     end
-
-    assert_redirected_to discipline_path(assigns(:discipline))
-  end
-
-  test "should show discipline" do
-    get :show, id: @discipline
-    assert_response :success
+    assert_redirected_to disciplines_path
   end
 
   test "should get edit" do
@@ -35,15 +29,17 @@ class DisciplinesControllerTest < ActionController::TestCase
   end
 
   test "should update discipline" do
-    put :update, id: @discipline, discipline: { name: @discipline.name }
-    assert_redirected_to discipline_path(assigns(:discipline))
+    new_name = "Oh my discipline!"
+    put :update, id: @discipline, record: { name: new_name }
+    assert_redirected_to disciplines_path
+    @discipline.reload
+    assert_equal new_name, @discipline.name
   end
 
   test "should destroy discipline" do
     assert_difference('Discipline.count', -1) do
       delete :destroy, id: @discipline
     end
-
     assert_redirected_to disciplines_path
   end
 end

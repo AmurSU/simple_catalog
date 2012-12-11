@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  suffix: MyString
-  description: MyString
+org_ru:
+  suffix: .org.ru
+  description: ORG Russia
 
-two:
-  suffix: MyString
-  description: MyString
+com_ua:
+  suffix: .com.ua
+  description: Commercial Ukraine
