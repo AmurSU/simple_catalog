@@ -2,6 +2,8 @@ language: ruby
 bundler_args: --without development assets production
 rvm:
   - 1.9.3
+  - rbx-19mode
+  - 2.0.0
 before_script:
   - cp config/database.travis.yml config/database.yml
   - RAILS_ENV=test bundle exec rake db:create
@@ -9,3 +11,7 @@ before_script:
 script: 
   - bundle exec rake spec
   - bundle exec rake test
+matrix:
+  allow_failures:
+    - rvm: rbx-19mode
+    - rvm: 2.0.0
