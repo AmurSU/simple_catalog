@@ -8,17 +8,17 @@ class Address < ActiveRecord::Base
   # Extract site host from URL
   before_save do |address|
     if address.url_changed?
-      address.domain = get_domain
-      address.generate_normalized_url!
-      address.generate_normalized_domain!
+      address.domain
+      address.normalized_url
+      address.normalized_domain
     end
   end
 
   validates_each :url do |record, attr, value|
     begin
-      host = URI.parse(value).normalize.host
+      host = URI.parse(value).normalize.host unless value.nil?
       record.errors.add(attr, :no_host) if host.nil?
-      record.errors.add(attr, :no_tld) unless host.include? '.' or host[-1] == '.'
+      record.errors.add(attr, :no_tld) unless host.nil? or host.include? '.' or host[-1] == '.'
     rescue URI::InvalidURIError
       record.errors.add(attr, :invalid)
     end
@@ -31,9 +31,13 @@ class Address < ActiveRecord::Base
     domain
   end
 
-  # If no protocol specified, add one. And check, that url always decoded to Unicode (for searching)
   def url=(value)
+    if value.blank?
+      self[:url] = value
+      return
+    end
     begin
+      # If no protocol specified, add one. And check, that url always decoded to Unicode (for searching)
       value = "http://"+value if not value.strip.empty? and URI.parse(value).normalize.host.nil?
       url = URI.parse(URI::unencode(value))
       url.host = IDN::Idna.toUnicode(url.host)
@@ -43,41 +47,34 @@ class Address < ActiveRecord::Base
     end
   end
 
-  def get_domain
-    domain = ""
-    host = IDN::Idna.toUnicode( URI.parse(url).normalize.host )
-    suffix_len = Zone.where("? ILIKE '%'||suffix", host).order("length DESC").pluck("char_length(suffix) AS length").first.to_i
-    unless suffix_len.zero?
-      suffix = host[-suffix_len..-1]
-      host = host[0...-suffix_len]
-      domain = host.split('.').last.to_s + suffix
-    else
-      parts = host.split('.')
-      domain = "#{parts[-2]}.#{parts[-1]}"
+  def domain
+    if self[:domain].blank? or url_changed?
+      host = IDN::Idna.toUnicode( URI.parse(url).normalize.host )
+      suffix_len = Zone.where("? ILIKE '%'||suffix", host).order("length DESC").pluck("char_length(suffix) AS length").first.to_i
+      unless suffix_len.zero?
+        suffix = host[-suffix_len..-1]
+        host = host[0...-suffix_len]
+        self[:domain] = host.split('.').last.to_s + suffix
+      else
+        parts = host.split('.')
+        self[:domain] = "#{parts[-2]}.#{parts[-1]}"
+      end
     end
-    return domain
+    self[:domain]
   end
 
   def normalized_url
     if self["normalized_url"].blank? or url_changed?
-      generate_normalized_url!
+      self["normalized_url"] = URI.parse(url).normalize.to_s
     end
     self["normalized_url"]
   end
 
   def normalized_domain
     if self["normalized_domain"].blank? or url_changed?
-      generate_normalized_domain!
+      self["normalized_domain"] = IDN::Idna.toASCII(domain)
     end
     self["normalized_domain"]
-  end
-
-  def generate_normalized_url!
-    self["normalized_url"] = URI.parse(url).normalize.to_s
-  end
-
-  def generate_normalized_domain!
-    self["normalized_domain"] = IDN::Idna.toASCII(domain)
   end
 
 end
