@@ -1,0 +1,9 @@
+test:
+  adapter: postgresql
+  host: 127.0.0.1
+  port: 5432
+  username: postgres
+  password:
+  database: simple_catalog_test
+  encoding: unicode
+  min_messages: ERROR

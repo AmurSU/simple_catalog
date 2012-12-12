@@ -202,6 +202,7 @@ DEPENDENCIES
   net-ssh (~> 2.3.0)
   pg
   rails (~> 3.2.6)
+  rake
   rspec-rails
   russian
   rvm-capistrano

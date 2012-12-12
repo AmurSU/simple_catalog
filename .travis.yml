@@ -1,0 +1,11 @@
+language: ruby
+bundler_args: --without development assets production
+rvm:
+  - 1.9.3
+before_script:
+  - cp config/database.travis.yml config/database.yml
+  - RAILS_ENV=test bundle exec rake db:create
+  - RAILS_ENV=test bundle exec rake db:schema:load
+script: 
+  - bundle exec rake spec
+  - bundle exec rake test

@@ -45,6 +45,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'rake'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
 end
