@@ -3,6 +3,8 @@
 
 Веб-ориентированное приложение для составления, поддержания и публикации каталога ссылок на веб-ресурсы, к которым разрешён доступ из локальной сети вуза.
 
+[![Build Status](https://travis-ci.org/AmurSU/simple_catalog.png?branch=master)](https://travis-ci.org/AmurSU/simple_catalog)
+
 Особенности:
 ------------
 
