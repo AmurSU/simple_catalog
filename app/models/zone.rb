@@ -4,7 +4,7 @@ class Zone < ActiveRecord::Base
   validates :suffix, :presence => true, :uniqueness => true
 
   before_save do |zone|
-    zone.suffix.downcase!
+    zone.suffix = Unicode::downcase(zone.suffix)
     zone.suffix = "."+zone.suffix unless zone.suffix.start_with? "."
   end
 
