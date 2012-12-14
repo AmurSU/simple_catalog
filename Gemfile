@@ -7,7 +7,7 @@ gem 'active_scaffold'
 gem 'devise', '~> 2.1.2'
 gem 'haml'
 gem 'russian'
-gem 'whenever', '~> 0.7.3'
+gem 'whenever'
 gem 'idn-ruby', :require => 'idn'
 gem 'addressable'
 
