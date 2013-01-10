@@ -4,6 +4,8 @@ rvm:
   - 1.9.3
   - rbx-19mode
   - 2.0.0
+before_install:
+  - sudo apt-get install -qq libidn11 libidn11-dev
 before_script:
   - cp config/database.travis.yml config/database.yml
   - RAILS_ENV=test bundle exec rake db:create
