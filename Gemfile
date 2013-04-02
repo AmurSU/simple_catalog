@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 3.2.6'
 
 gem 'pg'
-gem 'active_scaffold'
+gem "active_scaffold", github: "activescaffold/active_scaffold"
 gem 'devise', '~> 2.1.2'
 gem 'haml'
 gem 'russian'
