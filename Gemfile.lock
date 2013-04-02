@@ -80,6 +80,7 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
+    google-analytics-rails (0.0.4)
     haml (4.0.1)
       tilt
     highline (1.6.16)
@@ -200,6 +201,7 @@ DEPENDENCIES
   devise (~> 2.1.2)
   dropbox-sdk (~> 1.2.0)
   factory_girl_rails
+  google-analytics-rails
   haml
   idn-ruby
   jquery-rails

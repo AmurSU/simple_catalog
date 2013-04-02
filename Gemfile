@@ -10,6 +10,7 @@ gem 'russian'
 gem 'whenever'
 gem 'idn-ruby', :require => 'idn'
 gem 'addressable'
+gem 'google-analytics-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
